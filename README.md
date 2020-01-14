@@ -22,7 +22,7 @@
 
 #### Project Scope 
 
-Writing Cover Letters for people who are entering the software developer field for the first time. The program will take in user input 
+Writing Cover Letters for people who are entering the software developer field. The program will ask a series of questions, take in user input, and out put a customized cover letter. The program will populate multiple mad lib-style cover letters with personalized answers, and perform an analysis on all letters; then, choose the best letter to output to the user.
 
 #### MVP 
 
