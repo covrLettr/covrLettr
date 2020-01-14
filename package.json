@@ -24,7 +24,6 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "bcrypt": "^3.0.7",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
