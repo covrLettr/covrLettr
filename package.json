@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "covrlettr",
-=======
-  "name": "covrLettr",
->>>>>>> 8ba1ba31aebbd64b96a783cd22e88f2a7a7cb990
   "version": "1.0.0",
   "description": "Cover Letter Generator",
   "main": "server.js",
