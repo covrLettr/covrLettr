@@ -112,29 +112,24 @@ describe('app routes', () => {
                     __v: 0
                 });
             });
+
     });
 
-    it('can logout a user', async() => {
-        const user = await User.create({
-            email: 'covr@letter.com',
-            password: 'password'
-        });
+    // it('can logout a user', async() => {
+    //     const user = await User.create({
+    //         email: 'covr@letter.com',
+    //         password: 'password'
+    //     });
 
-        return request(app)
-            .post('/api/v1/auth/logout')
-            .send({ email: 'covr@letter.com', password: 'password' })
-            .then(res => {
-                // expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
-                expect(res.body).toEqual({
-                    _id: user.id,
-                    __v: 0
-                });
-            });
-    });
-
-
-
-
-
-
+    //     return request(app)
+    //         .post('/api/v1/auth/logout')
+    //         .send({ email: 'covr@letter.com', password: 'password' })
+    //         .then(res => {
+    //             expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
+    //             expect(res.body).toEqual({
+    //                 _id: user.id,
+    //                 __v: 0
+    //             });
+    //         });
 });
+
