@@ -248,4 +248,55 @@ describe('app routes', () => {
                 });
             });
     });
+
+    it('should delete an answer by id', async() => {
+        const answer = await getUserAnswer();
+        
+        return request(app)
+            .delete(`/api/v1/userAnswers/${answer._id}`)
+            .then(res => {
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    name: answer.name,
+                    pronoun: 'they/them',
+                    email: answer.email,
+                    phone: answer.phone,
+                    address: answer.address,
+                    companyName: answer.companyName,
+                    companyAddress: answer.companyAddress,
+                    hiringManager: answer.hiringManager,
+                    companyMission: answer.companyMission,
+                    jobKeyword1: answer.jobKeyword1,
+                    jobKeyword2: answer.jobKeyword2,
+                    jobKeyword3: answer.jobKeyword3,
+                    passion1: answer.passion1,
+                    passion2: answer.passion2,
+                    passion3: answer.passion3,
+                    positionTitle: answer.positionTitle,
+                    value1: answer.value1,
+                    value2: answer.value2,
+                    value3: answer.value3,
+                    companyCustomer: answer.companyCustomer,
+                    whyCustomerMatters: answer.whyCustomerMatters,
+                    companyMotivatesMeTo: answer.companyMotivatesMeTo,
+                    opportunitiesTheEmployerProvides1: answer.opportunitiesTheEmployerProvides1,
+                    opportunitiesTheEmployerProvides2: answer.opportunitiesTheEmployerProvides2,
+                    techLanguage1: answer.techLanguage1,
+                    techLanguage2: answer.techLanguage2,
+                    techLanguage3: answer.techLanguage3,
+                    techLanguage4: answer.techLanguage4,
+                    pastExperience: answer.pastExperience,
+                    skillJobDescription1: answer.skillJobDescription1,
+                    skillJobDescription2: answer.skillJobDescription2,
+                    skillJobDescription3: answer.skillJobDescription3,
+                    mainResponsibilityAtOldJob: answer.mainResponsibilityAtOldJob,
+                    pastAccomplishment1: answer.pastAccomplishment1,
+                    pastAccomplishment2: answer.pastAccomplishment2,
+                    excitedToDo: answer.excitedToDo,
+                    greeting: 'Dear',
+                    sincerely: 'Sincerely',
+                    __v: 0
+                });
+            });
+    });
 });
