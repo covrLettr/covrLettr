@@ -1,6 +1,8 @@
 var inquirer = require('inquirer');
 const validator = require('email-validator');
 const request = require('superagent');
+const { attemptLogin, attemptSignUp } = require('./services/auth');
+
 
 
 const signinInput = [
@@ -61,43 +63,43 @@ const signupInput = [
     }
 ];
 
-inquirer
-    .prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: ('What is your name?')
-        },
-        {
-            type: 'list',
-            name: 'pronoun',
-            message: ('What pronoun do you go by?'),
-            choices: ['they/them', 'she/her', 'he/him']
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: ('What is your email?')
-        },
-        {
-            type: 'input',
-            name: 'phone',
-            message: ('What is your phone number?')
-        },
-        {
-            type: 'input',
-            name: 'address',
-            message: ('What is your address?')
-        },
-        {
-            type: 'input',
-            name: 'companyName',
-            message: ('What is the company name you are applying for?')
-        },
-    ])
-    .then(answers => {
-        console.log(answers);
-    });
+// inquirer
+//     .prompt([
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: ('What is your name?')
+//         },
+//         {
+//             type: 'list',
+//             name: 'pronoun',
+//             message: ('What pronoun do you go by?'),
+//             choices: ['they/them', 'she/her', 'he/him']
+//         },
+//         {
+//             type: 'input',
+//             name: 'email',
+//             message: ('What is your email?')
+//         },
+//         {
+//             type: 'input',
+//             name: 'phone',
+//             message: ('What is your phone number?')
+//         },
+//         {
+//             type: 'input',
+//             name: 'address',
+//             message: ('What is your address?')
+//         },
+//         {
+//             type: 'input',
+//             name: 'companyName',
+//             message: ('What is the company name you are applying for?')
+//         },
+//     ])
+//     .then(answers => {
+//         console.log(answers);
+//     });
 
 const mainQuestions = [
     {
@@ -132,48 +134,29 @@ const mainQuestions = [
         message: ('What is the company name you are applying for?')
     }];
 
-const signinPrompt = () =>
+const signInPrompt = () =>
     inquirer.prompt(signinInput)
-        .then(answers => {
-            let user = {
-                email: answers.email,
-                password: answers.password
-            };
-            return request
-                .post('/api/v1/auth/login')
-                .send(user)
-                .then(({ body }) => {
-                    user = body;
-                })
-                .then(() => inquirer.prompt(mainQuestions))
-                .then((answers) => {
-                    return answers, user;
-                });
+        .then(user => {
+            attemptLogin(user)
+                .then(res => console.log(res));
 
         })
         .catch(() => {
             console.log('ERROR: Invalid email or password');
-            signinPrompt();
+            signInPrompt();
         });
 
-const signupPrompt = () =>
+const signUpPrompt = () =>
     inquirer.prompt(signupInput)
-        .then(answers => {
-            let user = {
-                email: answers.email,
-                password: answers.password
-            };
-            return request
-                .post('/api/v1/auth/signup')
-                .send(user)
-                .then(({ body }) => {
-                    user = body;
-                })
-                .then(() => inquirer.prompt(mainQuestions))
-                .then((answers) => {
-                    return answers, user;
-                });
+        .then(user => {
+            attemptSignUp(user)
+                .then(res => console.log(res));
+            // .then(() => inquirer.prompt(mainQuestions))
+            // .then((answers) => {
+            //     return answers, user;
+            // })
+            // .catch();
               
         });
 
-module.exports = { signinPrompt, signupPrompt };
+module.exports = { signInPrompt, signUpPrompt };
