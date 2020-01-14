@@ -140,7 +140,7 @@ const signinPrompt = () =>
                 password: answers.password
             };
             return request
-                .post('/api/v1/auth/signin')
+                .post('/api/v1/auth/login')
                 .send(user)
                 .then(({ body }) => {
                     user = body;
