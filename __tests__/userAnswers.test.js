@@ -196,4 +196,56 @@ describe('app routes', () => {
                 });
             });
     });
+
+    it('should update answer by id', async() => {
+        const answer = await getUserAnswer();
+
+        return request(app)
+            .patch(`/api/v1/userAnswers/${answer._id}`)
+            .send({ companyMission: 'Do things and stuff', techLanguage1: 'javascript' })
+            .then(res => {
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    name: expect.any(String),
+                    pronoun: 'they/them',
+                    email: expect.any(String),
+                    phone: expect.any(String),
+                    address: expect.any(String),
+                    companyName: expect.any(String),
+                    companyAddress: expect.any(String),
+                    hiringManager: expect.any(String),
+                    companyMission: 'Do things and stuff',
+                    jobKeyword1: expect.any(String),
+                    jobKeyword2: expect.any(String),
+                    jobKeyword3: expect.any(String),
+                    passion1: expect.any(String),
+                    passion2: expect.any(String),
+                    passion3: expect.any(String),
+                    positionTitle: expect.any(String),
+                    value1: expect.any(String),
+                    value2: expect.any(String),
+                    value3: expect.any(String),
+                    companyCustomer: expect.any(String),
+                    whyCustomerMatters: expect.any(String),
+                    companyMotivatesMeTo: expect.any(String),
+                    opportunitiesTheEmployerProvides1: expect.any(String),
+                    opportunitiesTheEmployerProvides2: expect.any(String),
+                    techLanguage1: 'javascript',
+                    techLanguage2: expect.any(String),
+                    techLanguage3: expect.any(String),
+                    techLanguage4: expect.any(String),
+                    pastExperience: expect.any(String),
+                    skillJobDescription1: expect.any(String),
+                    skillJobDescription2: expect.any(String),
+                    skillJobDescription3: expect.any(String),
+                    mainResponsibilityAtOldJob: expect.any(String),
+                    pastAccomplishment1: expect.any(String),
+                    pastAccomplishment2: expect.any(String),
+                    excitedToDo: expect.any(String),
+                    greeting: 'Dear',
+                    sincerely: 'Sincerely',
+                    __v: 0
+                });
+            });
+    });
 });
