@@ -139,8 +139,8 @@ const signInPrompt = () =>
         .then(user => {
             attemptLogin(user)
                 .then(res => console.log(res));
-
         })
+        .then(() => inquirer.prompt(mainQuestions))
         .catch(() => {
             console.log('ERROR: Invalid email or password');
             signInPrompt();
@@ -150,12 +150,12 @@ const signUpPrompt = () =>
     inquirer.prompt(signupInput)
         .then(user => {
             attemptSignUp(user)
-                .then(res => console.log(res));
-            // .then(() => inquirer.prompt(mainQuestions))
-            // .then((answers) => {
-            //     return answers, user;
-            // })
-            // .catch();
+                .then(res => console.log(res))
+                .then(() => inquirer.prompt(mainQuestions))
+                .then((answers) => {
+                    return answers, user;
+                })
+                .catch();
               
         });
 

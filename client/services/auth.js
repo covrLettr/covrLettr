@@ -25,8 +25,6 @@ const attemptLogin = (loginData) => {
     //     return answers, user;
     // });
 
-}
-
-;
+};
 
 module.exports = { attemptLogin, attemptSignUp };
