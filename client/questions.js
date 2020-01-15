@@ -250,8 +250,8 @@ const mainQuestions = [
 const signInPrompt = () =>
     inquirer.prompt(signinInput)
         .then(user => {
-            attemptLogin(user)
-                .then(res => console.log(res));
+            attemptLogin(user);
+            // .then(res => console.log(res));
         })
         .then(() => inquirer.prompt(mainQuestions))
         .catch(() => {
@@ -259,12 +259,12 @@ const signInPrompt = () =>
             signInPrompt();
         });
 
-const signUpPrompt = () =>
+const signUpPrompt = () => 
     inquirer.prompt(signupInput)
         .then(signUpData => {
-            attemptSignUp(signUpData)
-                .then(user => {
-                    console.log(user);
+            return  attemptSignUp(signUpData)
+                .then(() => {
+                    return inquirer.prompt(mainQuestions);
                     // if user redirect to mainQuestions, if no user route them back to sign up prompt
                     // if(user) {
                     //     console.log('User Recieved');
