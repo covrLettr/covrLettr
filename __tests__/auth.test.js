@@ -106,7 +106,6 @@ describe('app routes', () => {
         return agent
             .get('/api/v1/auth/verify')
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual({
                     _id: user.id,
                     email: 'covr@letter.com',
