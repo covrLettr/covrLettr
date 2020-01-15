@@ -33,6 +33,7 @@
     "mongoose": "^5.8.7",
     "superagent": "^5.2.1",
     "terminal-image": "^0.2.0",
-    "jsonwebtoken": "^8.5.1"
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
   }
 }
