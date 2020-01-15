@@ -2,6 +2,7 @@ var inquirer = require('inquirer');
 const validator = require('email-validator');
 const request = require('superagent');
 const { attemptLogin, attemptSignUp } = require('./services/auth');
+const { postUserAnswer } = require('./services/userAnswersPost');
 
 
 
@@ -251,7 +252,6 @@ const signInPrompt = () =>
     inquirer.prompt(signinInput)
         .then(user => {
             attemptLogin(user);
-            // .then(res => console.log(res));
         })
         .then(() => inquirer.prompt(mainQuestions))
         .catch(() => {
@@ -259,20 +259,20 @@ const signInPrompt = () =>
             signInPrompt();
         });
 
+const mainQuestionsPrompt = () => 
+    inquirer.prompt(mainQuestions)
+        .then(answers => {
+            console.log(answers);
+        });
+
 const signUpPrompt = () => 
     inquirer.prompt(signupInput)
         .then(signUpData => {
-            return  attemptSignUp(signUpData)
+            return attemptSignUp(signUpData)
                 .then(() => {
-                    return inquirer.prompt(mainQuestions);
-                    // if user redirect to mainQuestions, if no user route them back to sign up prompt
-                    // if(user) {
-                    //     console.log('User Recieved');
-                    //     inquirer.prompt(mainQuestions);
-                    // } else {
-                    //     console.log('Invalid Sign-Up, Please Try Again');
-                    // }
+                    return mainQuestionsPrompt();
                 })
+                
                 .catch(() => {
                     console.log('Email Taken, Please Try Again');
                    
