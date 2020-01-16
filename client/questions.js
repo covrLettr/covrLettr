@@ -77,6 +77,12 @@ const mainQuestions = [
         choices: ['they/them', 'she/her', 'he/him']
     },
     {
+        type: 'list',
+        name: 'greeting',
+        message: chalk.greenBright('What is your preferred greeting?'),
+        choices: ['Dear', 'Attention:', 'Hello']
+    },
+    {
         type: 'input',
         name: 'email',
         message: chalk.magenta('What is your email?')
@@ -250,6 +256,12 @@ const mainQuestions = [
         type: 'input',
         name: 'pastAccomplishment2',
         message: chalk.greenBright('What is another major past accomplishment?')
+    },
+    {
+        type: 'list',
+        name: 'sincerely',
+        message: chalk.magenta('What is your preferred signoff?'),
+        choices: ['Sincerely', 'Thank you', 'Best regards', 'Thank you for your consideration']
     }];
 
 const signInPrompt = () =>
