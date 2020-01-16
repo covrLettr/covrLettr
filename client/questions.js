@@ -2,7 +2,7 @@ var inquirer = require('inquirer');
 const validator = require('email-validator');
 const request = require('superagent');
 const { attemptLogin, attemptSignUp } = require('./services/auth');
-const { postUserAnswer } = require('./services/userAnswersPost');
+const { postUserAnswers } = require('./services/userAnswersPost');
 
 
 
@@ -86,6 +86,11 @@ const mainQuestions = [
         type: 'input',
         name: 'companyName',
         message: ('What is the company\'s name?')
+    },
+    {
+        type: 'input',
+        name: 'hiringManager',
+        message: ('Who is the hiring manager?')
     },
     {
         type: 'input',
@@ -259,23 +264,29 @@ const signInPrompt = () =>
             signInPrompt();
         });
 
-const mainQuestionsPrompt = () => 
+const mainQuestionsPrompt = (user) => 
     inquirer.prompt(mainQuestions)
         .then(answers => {
-            console.log(answers);
+            console.log('After MainQuestions');
+            console.log(user);
+            const userAnswer = { ...answers, userId: user._id };
+            console.log(userAnswer);
+            postUserAnswers(userAnswer)
+                .then(res => console.log(res))
+                .catch(console.log('Main Questions Error'));
         });
 
 const signUpPrompt = () => 
     inquirer.prompt(signupInput)
         .then(signUpData => {
             return attemptSignUp(signUpData)
-                .then(() => {
-                    return mainQuestionsPrompt();
+                .then((res) => {
+                    return mainQuestionsPrompt(res.body);
                 })
                 
                 .catch(() => {
                     console.log('Email Taken, Please Try Again');
-                   
+                    signUpPrompt();
                 });
                            
               
