@@ -2,6 +2,7 @@ var inquirer = require('inquirer');
 const validator = require('email-validator');
 const request = require('superagent');
 const { attemptLogin, attemptSignUp } = require('./services/auth');
+const { postUserAnswers } = require('./services/userAnswersPost');
 
 
 
@@ -85,6 +86,11 @@ const mainQuestions = [
         type: 'input',
         name: 'companyName',
         message: ('What is the company\'s name?')
+    },
+    {
+        type: 'input',
+        name: 'hiringManager',
+        message: ('Who is the hiring manager?')
     },
     {
         type: 'input',
@@ -250,8 +256,7 @@ const mainQuestions = [
 const signInPrompt = () =>
     inquirer.prompt(signinInput)
         .then(user => {
-            attemptLogin(user)
-                .then(res => console.log(res));
+            attemptLogin(user);
         })
         .then(() => inquirer.prompt(mainQuestions))
         .catch(() => {
@@ -259,23 +264,29 @@ const signInPrompt = () =>
             signInPrompt();
         });
 
-const signUpPrompt = () =>
+const mainQuestionsPrompt = (user) => 
+    inquirer.prompt(mainQuestions)
+        .then(answers => {
+            console.log('After MainQuestions');
+            console.log(user);
+            const userAnswer = { ...answers, userId: user._id };
+            console.log(userAnswer);
+            postUserAnswers(userAnswer)
+                .then(res => console.log(res))
+                .catch(console.log('Main Questions Error'));
+        });
+
+const signUpPrompt = () => 
     inquirer.prompt(signupInput)
         .then(signUpData => {
-            attemptSignUp(signUpData)
-                .then(user => {
-                    console.log(user);
-                    // if user redirect to mainQuestions, if no user route them back to sign up prompt
-                    // if(user) {
-                    //     console.log('User Recieved');
-                    //     inquirer.prompt(mainQuestions);
-                    // } else {
-                    //     console.log('Invalid Sign-Up, Please Try Again');
-                    // }
+            return attemptSignUp(signUpData)
+                .then((res) => {
+                    return mainQuestionsPrompt(res.body);
                 })
+                
                 .catch(() => {
                     console.log('Email Taken, Please Try Again');
-                   
+                    signUpPrompt();
                 });
                            
               

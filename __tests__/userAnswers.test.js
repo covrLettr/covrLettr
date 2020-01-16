@@ -1,10 +1,12 @@
-const { getUserAnswer, getUserAnswers } = require('../lib/helpers/data-helpers');
+const { getUserAnswer, getUserAnswers, getUser } = require('../lib/helpers/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
 
 describe('app routes', () => {
-    it('should create a new instance of user answers', () => {
+    it('should create a new instance of user answers', async() => {
+        const user = await getUser();
+
         return request(app)
             .post('/api/v1/userAnswers')
             .send({
@@ -45,7 +47,8 @@ describe('app routes', () => {
                 whyLikeCompany: 'baby yoda holding a corgi',
                 communityService: 'floating corgi',
                 lifeExperienceRelatedValues: 'corgi1 corgi2',
-                departmentName: 'corgiLord'
+                departmentName: 'corgiLord',
+                userId: user._id
             })
             .then(res => {
                 expect(res.body).toEqual({
@@ -88,6 +91,7 @@ describe('app routes', () => {
                     communityService: 'floating corgi',
                     lifeExperienceRelatedValues: 'corgi1 corgi2',
                     departmentName: 'corgiLord',
+                    userId: user._id,
                     __v: 0
                 });
             });
@@ -140,6 +144,7 @@ describe('app routes', () => {
                         communityService: expect.any(String),
                         lifeExperienceRelatedValues: expect.any(String),
                         departmentName: expect.any(String),
+                        userId: expect.any(String),
                         __v: 0
                     });
                 });
@@ -192,6 +197,7 @@ describe('app routes', () => {
                     communityService: expect.any(String),
                     lifeExperienceRelatedValues: expect.any(String),
                     departmentName: expect.any(String),
+                    userId: expect.any(String),
                     __v: 0
                 });
             });
@@ -244,6 +250,7 @@ describe('app routes', () => {
                     communityService: answer.communityService,
                     lifeExperienceRelatedValues: answer.lifeExperienceRelatedValues,
                     departmentName: answer.departmentName,
+                    userId: answer.userId,
                     __v: 0
                 });
             });
@@ -295,6 +302,7 @@ describe('app routes', () => {
                     communityService: answer.communityService,
                     lifeExperienceRelatedValues: answer.lifeExperienceRelatedValues,
                     departmentName: answer.departmentName,
+                    userId: expect.any(String),
                     __v: 0
                 });
             });
