@@ -1,19 +1,18 @@
 var inquirer = require('inquirer');
 const validator = require('email-validator');
+const chalk = require('chalk');
 const request = require('superagent');
 const { attemptLogin, attemptSignUp } = require('./services/auth');
 const { postUserAnswers } = require('./services/userAnswersPost');
-
-
 
 const signinInput = [
     {
         type: 'input',
         name: 'email',
-        message: ('Please enter your email'),
+        message: chalk.green('Please enter your email'),
         validate: function validEmail(email) {
             if(!validator.validate(email)) {
-                return 'Please enter a valid email';
+                return chalk.red('Please enter a valid email');
             }
             else {
                 return true;
@@ -23,13 +22,13 @@ const signinInput = [
     {
         type: 'password',
         name: 'password',
-        message: ('Please enter a password'),
+        message: chalk.green('Please enter a password'),
         validate: function validPass(pass) {
             if(pass.length !== 0) {
                 return true;
             }
             else {
-                return 'Please enter a valid password';
+                return chalk.red('Please enter a valid password');
             }
         }
     }
@@ -39,10 +38,10 @@ const signupInput = [
     {
         type: 'input',
         name: 'email',
-        message: ('Please enter your email'),
+        message: chalk.green('Please enter your email'),
         validate: function validEmail(email) {
             if(!validator.validate(email)) {
-                return 'Please enter a valid email';
+                return chalk.red('Please enter a valid email');
             }
             else {
                 return true;
@@ -52,13 +51,13 @@ const signupInput = [
     {
         type: 'password',
         name: 'password',
-        message: ('Please enter a password'),
+        message: chalk.green('Please enter a password'),
         validate: function validPass(pass) {
             if(pass.length !== 0) {
                 return true;
             }
             else {
-                return 'Please enter a valid password';
+                return chalk.red('Please enter a valid password');
             }
         }
     }
@@ -69,154 +68,154 @@ const mainQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: ('What is your name?')
+        message: chalk.white('What is your name?')
     },
     {
         type: 'list',
         name: 'pronoun',
-        message: ('What are your pronouns?'),
+        message: chalk.yellow('What are your pronouns?'),
         choices: ['they/them', 'she/her', 'he/him']
     },
     {
         type: 'list',
         name: 'greeting',
-        message: ('What is your preferred greeting?'),
+        message: chalk.greenBright('What is your preferred greeting?'),
         choices: ['Dear', 'Attention:', 'Hello']
     },
     {
         type: 'input',
         name: 'email',
-        message: ('What is your email?')
+        message: chalk.magenta('What is your email?')
     },
     {
         type: 'input',
         name: 'companyName',
-        message: ('What is the company\'s name?')
+        message: chalk.green('What is the company\'s name?')
     },
     {
         type: 'input',
         name: 'hiringManager',
-        message: ('Who is the hiring manager?')
+        message: chalk.white('Who is the hiring manager?')
     },
     {
         type: 'input',
         name: 'companyAddress',
-        message: ('What is the company\'s address?')
+        message: chalk.redBright('What is the company\'s address?')
     },
     {
         type: 'input',
         name: 'companyMission',
-        message: ('What is the company\'s mission statement?')
+        message: chalk.yellowBright('What is the company\'s mission statement?')
     },
     {
         type: 'input',
         name: 'departmentName',
-        message: ('What department are you applying for?')
+        message: chalk.green('What department are you applying for?')
     },
     {
         type: 'input',
         name: 'jobKeyWord1',
-        message: ('What is one key word from the job description?')
+        message: chalk.blueBright('What is one key word from the job description?')
     },
     {
         type: 'input',
         name: 'jobKeyWord2',
-        message: ('What is another key word from the job description?')
+        message: chalk.redBright('What is another key word from the job description?')
     },
     {
         type: 'input',
         name: 'jobKeyWord3',
-        message: ('What is a third key word from the job description?')
+        message: chalk.magentaBright('What is a third key word from the job description?')
     },
     {
         type: 'input',
         name: 'positionTitle',
-        message: ('What is the position you are applying for?')
+        message: chalk.whiteBright('What is the position you are applying for?')
     },
     {
         type: 'input',
         name: 'passion1',
-        message: ('What is one of your passions?')
+        message: chalk.green('What is one of your passions?')
     },
     {
         type: 'input',
         name: 'passion2',
-        message: ('What is another passion?')
+        message: chalk.red('What is another passion?')
     },
     {
         type: 'input',
         name: 'passion3',
-        message: ('Name a third passion')
+        message: chalk.yellow('Name a third passion')
     },
     {
         type: 'input',
         name: 'skillJobDescription1',
-        message: ('What is a skill you have that the job requires?')
+        message: chalk.green('What is a skill you have that the job requires?')
     },
     {
         type: 'input',
         name: 'skillJobDescription2',
-        message: ('What is another skill you have that the job requires?')
+        message: chalk.magenta('What is another skill you have that the job requires?')
     },
     {
         type: 'input',
         name: 'skillJobDescription3',
-        message: ('What is a third skill you have that the job requires?')
+        message: chalk.yellow('What is a third skill you have that the job requires?')
     },
     {
         type: 'input',
         name: 'whyLikeCompany',
-        message: ('Why do you like this company?')
+        message: chalk.white('Why do you like this company?')
     },
     {
         type: 'input',
         name: 'somethingYouLove',
-        message: ('What is something you love?')
+        message: chalk.greenBright('What is something you love?')
     },
     {
         type: 'input',
         name: 'value1',
-        message: ('List one of your values.')
+        message: chalk.blue('List one of your values.')
     },
     {
         type: 'input',
         name: 'value2',
-        message: ('List another one of your values.')
+        message: chalk.yellow('List another one of your values.')
     },
     {
         type: 'input',
         name: 'value3',
-        message: ('Name a third value.')
+        message: chalk.red('Name a third value.')
     },
     {
         type: 'input',
         name: 'lifeExperienceRelatedValues',
-        message: ('Tell me about a time in your life when you demonstrated one of those values?')
+        message: chalk.white('Tell me about a time in your life when you demonstrated one of those values?')
     },
     {
         type: 'input',
         name: 'communityService',
-        message: ('Is the organization a part of any community service? If so, what?')
+        message: chalk.blueBright('Is the organization a part of any community service? If so, what?')
     },
     {
         type: 'input',
         name: 'companyCustomer',
-        message: ('Who are the target customers of this company?')
+        message: chalk.green('Who are the target customers of this company?')
     },
     {
         type: 'input',
         name: 'whyCustomerMatters',
-        message: ('Why are those customers close to your heart?')
+        message: chalk.magenta('Why are those customers close to your heart?')
     },
     {
         type: 'input',
         name: 'companyMotivatesMeTo',
-        message: ('If hired, what would you be motivated to do?')
+        message: chalk.yellow('If hired, what would you be motivated to do?')
     },
     {
         type: 'input',
         name: 'opportunitiesTheEmployerProvides1',
-        message: ('What opportunities does this company offer it\'s employees?')
+        message: chalk.red('What opportunities does this company offer it\'s employees?')
     },
     // {
     //     type: 'input',
@@ -226,42 +225,42 @@ const mainQuestions = [
     {
         type: 'input',
         name: 'techLanguage1',
-        message: ('List a technical languages/skill you know?')
+        message: chalk.magenta('List a technical languages/skill you know?')
     },
     {
         type: 'input',
         name: 'techLanguage2',
-        message: ('List a second technical languages/skill you know?')
+        message: chalk.blue('List a second technical languages/skill you know?')
     },
     {
         type: 'input',
         name: 'techLanguage3',
-        message: ('List a third technical languages/skill you know?')
+        message: chalk.green('List a third technical languages/skill you know?')
     },
     {
         type: 'input',
         name: 'techLanguage4',
-        message: ('List a final technical languages/skill you know?')
+        message: chalk.yellow('List a final technical languages/skill you know?')
     },
     {
         type: 'input',
         name: 'pastExperience',
-        message: ('What was your last job?')
+        message: chalk.blueBright('What was your last job?')
     },
     {
         type: 'input',
         name: 'pastAccomplishment1',
-        message: ('What is a major past accomplishment?')
+        message: chalk.yellowBright('What is a major past accomplishment?')
     },
     {
         type: 'input',
         name: 'pastAccomplishment2',
-        message: ('What is another major past accomplishment?')
+        message: chalk.greenBright('What is another major past accomplishment?')
     },
     {
         type: 'list',
         name: 'sincerely',
-        message: ('What is your preferred signoff?'),
+        message: chalk.magenta('What is your preferred signoff?'),
         choices: ['Sincerely', 'Thank you', 'Best regards', 'Thank you for your consideration']
     }];
 
