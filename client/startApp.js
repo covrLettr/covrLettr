@@ -10,7 +10,7 @@ const startApp = [{
     choices: ['Sign In', 'Sign Up', 'Meet the Devs']
 }];
 
-const covrLettrLogo = 'assets/covrLettr.png';
+const covrLettrLogo = 'assets/covrLettr16.png';
 
 const letterApp = () => {
     return terminalImage.file(covrLettrLogo)
