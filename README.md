@@ -2,31 +2,25 @@
 
 ## Career Track Project 1: CovrLettr
 # Team Mates: 
-    Sam Sterns
-    Mike Grace 
-    Nikki Sato
-    Travis Molter
+    Sam Sterns, Mike Grace, Nikki Sato, Travis Molter
     
-## Community Agreements 
-    * Mob/Pair Programming 
-    ** Direct Communication 
-    *** PRs must be reviewed / merge party 
-    **** One person talking at a time 
-    ***** everybody updates their own trello tickets 
+## Libraries, Framework, and Packages 
 
-### Conflict/Communication  Plan
-    * Talk to each other 
-    ** How will we make sure everyone's voice is heard? SAY IT and we LISTEN
-    *** Let people speak 
-    **** If we can't work it out as a group, bring in the staff
+    npm Sentiment
+
+# Versioning 
+
+CovrLettr 1.0 is 
+
+# Database Schemas 
 
 #### Project Scope 
 
 Writing Cover Letters for people who are entering the software developer field. The program will ask a series of questions, take in user input, and out put a customized cover letter. The program will populate multiple mad lib-style cover letters with personalized answers, and perform an analysis on all letters; then, choose the best letter to output to the user.
 
-#### MVP 
+## Disclaimer: 
 
-User input , populate a number of madlib cover letters/ save user ansewers , have some sort of sentiment scoring or gold standard scoring, and output the highest scored letter to user 
+This program is meant to be a brainstorm or place to start. Do not use your letter word for word for a real job, because some of the writing is taken from popular articles. 
 
 # User Stories 
 
@@ -38,3 +32,16 @@ I suffer from writer's block and need a creative place to start. I write so many
 
 I come from a non-related career background. I have written cover letters for other jobs, but none have related specifically to software engineering. I would like a template that accurately and seamlessly includes my relevant past experience and relates accomplishments from past jobs to the job I’m seeking, even if those industries don’t overlap.
 
+
+## Community Agreements 
+    * Mob/Pair Programming 
+    * Direct Communication 
+    * PRs must be reviewed / merge party 
+    * One person talking at a time 
+    * Everybody updates their own trello tickets 
+
+### Conflict/Communication  Plan
+    * Talk to each other 
+    * How will we make sure everyone's voice is heard?* SAY IT and we LISTEN
+    * Let people speak 
+    * If we can't work it out as a group, bring in the staff
