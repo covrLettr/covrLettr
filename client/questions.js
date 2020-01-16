@@ -1,5 +1,6 @@
 var inquirer = require('inquirer');
 const validator = require('email-validator');
+const chalk = require('chalk');
 const request = require('superagent');
 const { attemptLogin, attemptSignUp } = require('./services/auth');
 const { postUserAnswers } = require('./services/userAnswersPost');
