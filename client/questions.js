@@ -212,11 +212,6 @@ const mainQuestions = [
         name: 'opportunitiesTheEmployerProvides1',
         message: ('What opportunities does this company offer it\'s employees?')
     },
-    // {
-    //     type: 'input',
-    //     name: 'opportunitiesTheEmployerProvides2',
-    //     message: ('What is another opportunity the company offer it\'s employees?')
-    // },
     {
         type: 'input',
         name: 'techLanguage1',
@@ -252,29 +247,32 @@ const mainQuestions = [
         name: 'pastAccomplishment2',
         message: ('What is another major past accomplishment?')
     }];
+    
+const mainQuestionsPrompt = (user) => 
+    inquirer.prompt(mainQuestions)
+        .then(answers => {
+            // console.log('After MainQuestions');
+            // console.log(user);
+            const userAnswer = { ...answers, userId: user._id };
+            // console.log(userAnswer);
+           return postUserAnswers(userAnswer)
+                // .then(res => console.log(res.body))
+                .catch(console.log('Main Questions Error'));
+            });
 
 const signInPrompt = () =>
     inquirer.prompt(signinInput)
         .then(user => {
-            attemptLogin(user);
-        })
-        .then(() => inquirer.prompt(mainQuestions))
-        .catch(() => {
-            console.log('ERROR: Invalid email or password');
-            signInPrompt();
+            return attemptLogin(user)
+                .then((res) => {
+                    return mainQuestionsPrompt(res.body);
+                })
+                .catch(() => {
+                    console.log('ERROR: Invalid email or password');
+                    signInPrompt();
+                });
         });
 
-const mainQuestionsPrompt = (user) => 
-    inquirer.prompt(mainQuestions)
-        .then(answers => {
-            console.log('After MainQuestions');
-            console.log(user);
-            const userAnswer = { ...answers, userId: user._id };
-            console.log(userAnswer);
-            postUserAnswers(userAnswer)
-                .then(res => console.log(res))
-                .catch(console.log('Main Questions Error'));
-        });
 
 const signUpPrompt = () => 
     inquirer.prompt(signupInput)
@@ -283,13 +281,10 @@ const signUpPrompt = () =>
                 .then((res) => {
                     return mainQuestionsPrompt(res.body);
                 })
-                
                 .catch(() => {
-                    console.log('Email Taken, Please Try Again');
+                    console.log('ERROR: Email Taken, Please Try Again');
                     signUpPrompt();
                 });
-                           
-              
         });
 
 module.exports = { signInPrompt, signUpPrompt };
