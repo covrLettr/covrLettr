@@ -29,7 +29,8 @@ describe('app routes', () => {
                 expect(res.body).toEqual({
                     _id: expect.any(String),
                     email: 'covr@letter.com',
-                    __v: 0
+                    __v: 0,
+                    id: expect.any(String)
                 });
             });
     });
@@ -48,7 +49,8 @@ describe('app routes', () => {
                 expect(res.body).toEqual({
                     _id: user.id,
                     email: 'covr@letter.com',
-                    __v: 0
+                    __v: 0,
+                    id: expect.any(String)
                 });
             });
     });
