@@ -3,16 +3,10 @@
 ## Career Track Project 1: CovrLettr
 # Team Mates: 
     Sam Sterns, Mike Grace, Nikki Sato, Travis Molter
-    
-## Libraries, Framework, and Packages 
-
-    npm Sentiment
 
 # Versioning 
 
-CovrLettr 1.0 is 
-
-# Database Schemas 
+CovrLettr 1.0
 
 #### Project Scope 
 
@@ -45,3 +39,35 @@ I come from a non-related career background. I have written cover letters for ot
     * How will we make sure everyone's voice is heard?* SAY IT and we LISTEN
     * Let people speak 
     * If we can't work it out as a group, bring in the staff
+
+### Dependencies
+
+    "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "chance": "^1.1.4",
+    "eslint": "^6.8.0",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chalk": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.1",
+    "inquirer": "^7.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.7",
+    "sentiment": "^5.0.2",
+    "superagent": "^5.2.1",
+    "terminal-image": "^0.2.0"
+  }
+
+### About us
+
+    * Mike Grace  
+    * linkedIn: 'https://www.linkedin.com/in/mikeegrace',
+    * github: 'https://github.com/TravelFiend',
+    * about: 'Mike Grace is an avid developer and traveller. He is most at home in unfamiliar places with unfamiliar people.'
+    * Favorite fruit: Mongos
