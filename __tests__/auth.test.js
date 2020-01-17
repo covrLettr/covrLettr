@@ -13,13 +13,11 @@ describe('app routes', () => {
 
     beforeEach(() => {
         return mongoose.connection.dropDatabase();
-
     });
 
     afterAll(() => {
         return mongoose.connection.close();
     });
-    
 
     it('can signup a user with email and password', () => {
         return request(app)
@@ -35,7 +33,6 @@ describe('app routes', () => {
             });
     });
 
-  
     it('can login a user with email and password', async() => {
         const user = await User.create({
             email: 'covr@letter.com',
@@ -54,7 +51,6 @@ describe('app routes', () => {
                 });
             });
     });
-
 
     it('fails to login a user with a bad email', async() => {
         await User.create({
@@ -91,23 +87,5 @@ describe('app routes', () => {
                 });
             });
     });
-
-
-    // it('can logout a user', async() => {
-    //     const user = await User.create({
-    //         email: 'covr@letter.com',
-    //         password: 'password'
-    //     });
-
-    //     return request(app)
-    //         .post('/api/v1/auth/logout')
-    //         .send({ email: 'covr@letter.com', password: 'password' })
-    //         .then(res => {
-    //             expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
-    //             expect(res.body).toEqual({
-    //                 _id: user.id,
-    //                 __v: 0
-    //             });
-    //         });
 });
 
