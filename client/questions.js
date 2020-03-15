@@ -195,7 +195,7 @@ const mainQuestions = [
     {
         type: 'input',
         name: 'communityService',
-        message: chalk.blueBright('Is the organization a part of any community service? If so, what?')
+        message: chalk.blueBright('What community service does the company do?')
     },
     {
         type: 'input',
@@ -217,11 +217,6 @@ const mainQuestions = [
         name: 'opportunitiesTheEmployerProvides1',
         message: chalk.red('What opportunities does this company offer it\'s employees?')
     },
-    // {
-    //     type: 'input',
-    //     name: 'opportunitiesTheEmployerProvides2',
-    //     message: ('What is another opportunity the company offer it\'s employees?')
-    // },
     {
         type: 'input',
         name: 'techLanguage1',
