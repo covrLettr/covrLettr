@@ -20,19 +20,19 @@ describe('app routes', () => {
         return mongoose.connection.close();
     });
 
-    // it('can signup a user with email and password', () => {
-    //     return request(app)
-    //         .post('/api/v1/auth/signup')
-    //         .send({ email: 'covr@letter.com', password: 'password' })
-    //         .then(res => {
-    //             expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
-    //             expect(res.body).toEqual({
-    //                 _id: expect.any(String),
-    //                 email: 'covr@letter.com',
-    //                 __v: 0
-    //             });
-    //         });
-    // });
+    it('can signup a user with email and password', () => {
+        return request(app)
+            .post('/api/v1/auth/signup')
+            .send({ email: 'covr@letter.com', password: 'password' })
+            .then(res => {
+                expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    email: 'covr@letter.com',
+                    __v: 0
+                });
+            });
+    });
 
     it('can login a user with email and password', async() => {
         const user = await User.create({
