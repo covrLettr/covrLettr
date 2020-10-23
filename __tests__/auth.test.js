@@ -1,3 +1,4 @@
+/* eslint-disable space-before-function-paren */
 require('dotenv').config();
 
 const request = require('supertest');
@@ -25,6 +26,7 @@ describe('app routes', () => {
             .post('/api/v1/auth/signup')
             .send({ email: 'covr@letter.com', password: 'password' })
             .then(res => {
+                console.log(res.body);
                 expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
                 expect(res.body).toEqual({
                     _id: expect.any(String),
@@ -34,7 +36,7 @@ describe('app routes', () => {
             });
     });
 
-    it('can login a user with email and password', async() => {
+    it('can login a user with email and password', async () => {
         const user = await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -54,7 +56,7 @@ describe('app routes', () => {
     });
 
 
-    it('fails to login a user with a bad email', async() => {
+    it('fails to login a user with a bad email', async () => {
         await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -72,7 +74,7 @@ describe('app routes', () => {
             });
     });
 
-    it('fails to login a user with a bad password', async() => {
+    it('fails to login a user with a bad password', async () => {
         await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -90,12 +92,12 @@ describe('app routes', () => {
             });
     });
 
-    it('can verify if a user is logged in', async() => {
+    it('can verify if a user is logged in', async () => {
         const user = await User.create({
             email: 'covr@letter.com',
             password: 'password'
         });
-        
+
         const agent = request.agent(app);
         await agent
             .post('/api/v1/auth/login')
@@ -104,7 +106,6 @@ describe('app routes', () => {
         return agent
             .get('/api/v1/auth/verify')
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual({
                     _id: user.id,
                     email: 'covr@letter.com',
