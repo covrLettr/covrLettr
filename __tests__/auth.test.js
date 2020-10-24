@@ -26,7 +26,6 @@ describe('app routes', () => {
             .post('/api/v1/auth/signup')
             .send({ email: 'covr@letter.com', password: 'password' })
             .then(res => {
-                console.log(res.body);
                 expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
                 expect(res.body).toEqual({
                     _id: expect.any(String),
@@ -36,7 +35,7 @@ describe('app routes', () => {
             });
     });
 
-    it('can login a user with email and password', async () => {
+    it('can login a user with email and password', async() => {
         const user = await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -56,7 +55,7 @@ describe('app routes', () => {
     });
 
 
-    it('fails to login a user with a bad email', async () => {
+    it('fails to login a user with a bad email', async() => {
         await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -74,7 +73,7 @@ describe('app routes', () => {
             });
     });
 
-    it('fails to login a user with a bad password', async () => {
+    it('fails to login a user with a bad password', async() => {
         await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -92,7 +91,7 @@ describe('app routes', () => {
             });
     });
 
-    it('can verify if a user is logged in', async () => {
+    it('can verify if a user is logged in', async() => {
         const user = await User.create({
             email: 'covr@letter.com',
             password: 'password'
@@ -112,10 +111,9 @@ describe('app routes', () => {
                     __v: 0
                 });
             });
-
     });
 
-    // it('can logout a user', async() => {
+    // it('can logout a user', async () => {
     //     const user = await User.create({
     //         email: 'covr@letter.com',
     //         password: 'password'
