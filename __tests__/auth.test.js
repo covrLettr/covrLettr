@@ -1,3 +1,4 @@
+/* eslint-disable space-before-function-paren */
 require('dotenv').config();
 
 const request = require('supertest');
@@ -95,7 +96,7 @@ describe('app routes', () => {
             email: 'covr@letter.com',
             password: 'password'
         });
-        
+
         const agent = request.agent(app);
         await agent
             .post('/api/v1/auth/login')
@@ -104,17 +105,15 @@ describe('app routes', () => {
         return agent
             .get('/api/v1/auth/verify')
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual({
                     _id: user.id,
                     email: 'covr@letter.com',
                     __v: 0
                 });
             });
-
     });
 
-    // it('can logout a user', async() => {
+    // it('can logout a user', async () => {
     //     const user = await User.create({
     //         email: 'covr@letter.com',
     //         password: 'password'
